@@ -6,7 +6,7 @@ const provider = new ethers.JsonRpcProvider("https://polygon-amoy.infura.io/v3/8
 
 async function mintNft() {
     const contractAddress = "0xb70f613516F9cBf1db316E70c651f263ebD8735D";
-    const privateKey = "9870df999eaff92099bdebe4d38789f1f1f1b4042f692e6a1dab9172a33d03b8"
+    const privateKey = ""
 
     const signer = new ethers.Wallet(privateKey, provider);
 
