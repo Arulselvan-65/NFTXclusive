@@ -20,28 +20,28 @@ const mockNFTs: NFTCard[] = [
         name: "Cosmic Drift #1",
         price: "0.5",
         currency: "ETH",
-        image: "/api/placeholder/400/400",
+        image: "",
     },
     {
         id: 2,
         name: "Digital Dreams #7",
         price: "0.8",
         currency: "ETH",
-        image: "/api/placeholder/400/400",
+        image: "",
     },
     {
         id: 3,
         name: "Neon Genesis #4",
         price: "1.2",
         currency: "ETH",
-        image: "/api/placeholder/400/400",
+        image: "",
     },
     {
         id: 4,
         name: "Virtual Visions #2",
         price: "0.6",
         currency: "ETH",
-        image: "/api/placeholder/400/400",
+        image: "",
     },
 ];
 
