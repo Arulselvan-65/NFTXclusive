@@ -82,7 +82,6 @@ Run the tests:
 npx hardhat test --network polygon_amoy
 ```
 
-Feel free to explore and modify the contract to suit your needs, and consider contributing to its development or expanding its features.
 
 ---
 
