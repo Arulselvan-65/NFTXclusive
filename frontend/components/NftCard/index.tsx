@@ -1,65 +1,48 @@
+// components/NftCard.tsx
 'use client';
-
-import { useState } from 'react';
-import Image from 'next/image';
+import { FC } from 'react';
 
 interface NFT {
     id: number;
     name: string;
-    image: string;
     price: string;
     currency: string;
+    image: string;
 }
 
 interface NftCardProps {
     nfts: NFT[];
 }
 
-const NftCard: React.FC<NftCardProps> = ({ nfts }) => {
-    const [hoveredCard, setHoveredCard] = useState<number | null>(null);
-
+const NftCard: FC<NftCardProps> = ({ nfts }) => {
     return (
-        <div className="container mx-auto">
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-                {nfts.map((nft) => (
-                    <div
-                        key={nft.id}
-                        className="bg-[#202020] rounded-2xl shadow-xl transition-all duration-300 hover:transform hover:scale-105"
-                        onMouseEnter={() => setHoveredCard(nft.id)}
-                        onMouseLeave={() => setHoveredCard(null)}
-                    >
-                        <div className="relative aspect-square rounded-t-2xl overflow-hidden">
-                            <Image
-                                src={nft.image}
-                                alt={nft.name}
-                                fill
-                                className="object-cover"
-                            />
-                        </div>
-
-                        <div className="p-4">
-                            <h3 className="text-white font-semibold mb-2">{nft.name}</h3>
-
-                            <div className="flex justify-between items-center mb-4">
-                                <span className="text-sm text-[#B3B3B3]">Current Price</span>
-                                <div className="flex items-center">
-                                    <span className="text-lg font-bold text-white">{nft.price}</span>
-                                    <span className="text-sm text-[#B3B3B3] ml-1">{nft.currency}</span>
-                                </div>
-                            </div>
-
-                            <button
-                                className={`w-full py-3 px-4 rounded-xl font-semibold transition-colors duration-300 ${hoveredCard === nft.id
-                                        ? 'bg-purple-600 text-white'
-                                        : 'bg-purple-500 text-white'
-                                    }`}
-                            >
-                                Buy Now
-                            </button>
-                        </div>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+            {nfts.map((nft) => (
+                <div
+                    key={nft.id}
+                    className="bg-[#2a2a2a]/50 rounded-xl overflow-hidden hover:transform hover:scale-105 transition-all duration-300 border border-gray-800/50 hover:border-purple-500/50"
+                >
+                    <div className="relative aspect-square">
+                        <img
+                            src={nft.image}
+                            alt={nft.name}
+                            className="w-full h-full object-cover"
+                        />
                     </div>
-                ))}
-            </div>
+                    <div className="p-4">
+                        <h3 className="text-lg font-semibold text-white mb-2">{nft.name}</h3>
+                        <div className="flex justify-between items-center">
+                            <span className="text-gray-400">Price</span>
+                            <span className="text-white font-medium">
+                                {nft.price} {nft.currency}
+                            </span>
+                        </div>
+                        <button className="w-full mt-4 py-2 px-4 bg-purple-500 text-white rounded-lg hover:bg-purple-600 transition-colors">
+                            View Details
+                        </button>
+                    </div>
+                </div>
+            ))}
         </div>
     );
 };
