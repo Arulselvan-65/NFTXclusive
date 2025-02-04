@@ -31,7 +31,7 @@ const ConnectButtonC = () => {
                             {(() => {
                                 if (!connected) {
                                     return (
-                                        <Button onclick={openConnectModal} className= "bg-gradient-to-r from-purple-500 to-indigo-500 text-white" text={"Connect Wallet"}/>
+                                        <Button onclick={openConnectModal} className= "bg-gradient-to-r from-purple-500 to-indigo-500 text-white cursor-pointer rounded-lg" text={"Connect Wallet"}/>
                                     );
                                 }
 
