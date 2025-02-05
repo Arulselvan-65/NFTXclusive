@@ -7,16 +7,11 @@ import Navbar from '../Navbar';
 
 const NFTDetailsPage = ({ nft }) => {
 
+
   const nftId = nft.attributes.find(item => item.trait_type === "Token ID").value
 
   const defaultNFT = {
-    id: nftId,
-    name: nft.name,
-    price: '78',
-    currency: 'ETH',
-    image: 'https://bafybeigm4o2z67cphws4srdij4q3vsfl2hyt6kahtr7m3z2n2ingrhjbse.ipfs.dweb.link/',
-    description: 'A unique digital masterpiece that explores the boundaries of space and time. This NFT represents a convergence of digital art and blockchain technology.',
-    details: [
+      details: [
       { label: 'Contract Address', value: 'Artisan' },
       { label: 'Token ID', value: `${nftId}` },
       { label: 'Token Standard', value: 'ERC1155' },
@@ -44,7 +39,7 @@ const NFTDetailsPage = ({ nft }) => {
                     <div className="flex items-center gap-2">
                       <Wallet size={20} className="text-purple-400" />
                       <span className="text-2xl font-bold bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
-                        {"nft.price"} {"btc"}
+                        {"500"} {nft.currency}
                       </span>
                     </div>
                   </div>

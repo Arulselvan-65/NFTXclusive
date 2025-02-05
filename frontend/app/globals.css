@@ -14,6 +14,14 @@
 body {
     background-color: black;
 }
+@keyframes pulse {
+  0%, 100% { opacity: 0.6; }
+  50% { opacity: 0.2; }
+}
+
+.animate-pulse {
+  animation: pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
 
 @keyframes move {
     0% {
@@ -28,17 +36,7 @@ body {
 }
 
 
-.sidebar {
-    transition: transform 0.3s ease-in-out;
-    position: fixed;
-    top: 0;
-    left: 0;
-    height: 100%;
-    z-index: 50;
-}
-.sidebar-hidden {
-    transform: translateX(-100%);
-}
+
 .neon-border {
     border: 2px solid transparent;
     border-image: linear-gradient(45deg, #ff00ff, #00ffff) 1;
@@ -73,75 +71,5 @@ body {
     top: 80%;
     left: 30%;
 }
-@keyframes move {
-    0% {
-        transform: translateY(0) translateX(0);
-    }
-    50% {
-        transform: translateY(-20px) translateX(20px);
-    }
-    100% {
-        transform: translateY(0) translateX(0);
-    }
-}
-.gradient-text {
-    background: linear-gradient(45deg, #ff00ff, #00ffff);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-}
 
-.blurred-bg {
-    background: rgba(0, 0, 0, 0.5);
-    border-radius: 10px;
-    padding: 1rem;
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-}
 
-.active {
-    border-bottom: 2px solid #8a2be2;
-    color: #8a2be2;
-}
-
-.search-input:focus {
-    border-color: #8a2be2;
-}
-.creator-card {
-    background-color: transparent;
-}
-
-.blurred-bg {
-    background: rgba(0, 0, 0, 0.5);
-    border-radius: 10px;
-    padding: 1rem;
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-}
-.creator-card:hover {
-    background: rgba(40, 40, 40, 0.5);
-    border-radius: 10px;
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    cursor: pointer;
-}
-.creator-rank {
-    color: #ffffff;
-}
-.creator-name {
-    color: #ffffff;
-}
-.creator-supporters {
-    color: #ffffff;
-}
-.rainbow-text {
-    background: linear-gradient(90deg, #ff6347, #ff4500, #ff8c00, #ffd700, #adff2f, #32cd32, #00ced1, #1e90ff, #8a2be2, #ff69b4);
-    background-size: 200% 200%;
-    animation: rainbow 5s linear infinite;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-}
-@keyframes rainbow {
-    0% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
-    100% { background-position: 0% 50%; }
-}
