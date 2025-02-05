@@ -3,10 +3,9 @@ import {
     polygonAmoy
 } from 'wagmi/chains';
 
-const project_id = process.env.RAINBOW_PROJECT_ID
 export const config = getDefaultConfig({
     appName: 'NftXclusive',
-    projectId: `${project_id}` || '',
+    projectId: '11e0fa8fea92c93f48493a5cdfffec59',
     chains: [polygonAmoy],
     ssr: true,
 });

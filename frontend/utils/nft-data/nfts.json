@@ -1,30 +1,30 @@
 [
     {
-        "id": 1,
-        "name": "Cosmic Drift #1",
-        "price": "0.5",
-        "currency": "ETH",
+        "id": 11,
+        "name": "Galactic Joy",
+        "price": "500",
+        "currency": "JT",
         "image": "https://bafybeigm4o2z67cphws4srdij4q3vsfl2hyt6kahtr7m3z2n2ingrhjbse.ipfs.dweb.link/"
     },
     {
-        "id": 2,
-        "name": "Digital Dreams #7",
-        "price": "0.8",
-        "currency": "ETH",
+        "id": 22,
+        "name": "Heroic Dreamer",
+        "price": "500",
+        "currency": "HT",
         "image": "https://bafybeia6o5ec4jfte2p5xvnpuia4wx4ax75ht6sum7t2ttercxppynn5we.ipfs.dweb.link/"
     },
     {
-        "id": 3,
-        "name": "Neon Genesis #4",
-        "price": "1.2",
-        "currency": "ETH",
+        "id": 33,
+        "name": "Playful Explorer",
+        "price": "500",
+        "currency": "PT",
         "image": "https://bafybeihrulkqwlfbumgrscev3kps2ia2r3pwpfkw4hjhmcdo5ouii4adaa.ipfs.dweb.link/"
     },
     {
-        "id": 4,
-        "name": "Virtual Visions #2",
-        "price": "0.6",
-        "currency": "ETH",
+        "id": 44,
+        "name": "Cool Mystic",
+        "price": "500",
+        "currency": "CT",
         "image": "https://bafybeiapgqtknu66kai5ixg7pfxv3o3de5lb6vnvye7wjvj67a6cfvsc4q.ipfs.dweb.link"
     }
 ]

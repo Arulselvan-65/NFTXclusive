@@ -13,7 +13,7 @@ const DiscoverPage: FC = () => {
                 <div className="w-full max-w-7xl">
                     <div className="flex flex-col items-center mb-7 relative">
                         <div className="absolute top-0 left-1/2 -translate-x-1/2 w-80 h-80 md:w-96 md:h-96 bg-purple-500/20 rounded-full blur-3xl" />
-                        
+
                         <h1 className="text-4xl md:text-5xl lg:text-6xl mt-11 md:mt-2 font-bold text-white mb-4 text-center relative">
                             Discover <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-indigo-500">NFTs</span>
                         </h1>
@@ -33,3 +33,4 @@ const DiscoverPage: FC = () => {
 };
 
 export default DiscoverPage;
+
