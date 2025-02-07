@@ -1,11 +1,20 @@
-'use client';
-import React from 'react';
-import { Wallet } from 'lucide-react';
+import React, { useState } from 'react';
+import { Wallet, ChevronDown } from 'lucide-react';
 import Navbar from '../Navbar';
 
 const NFTDetailsPage = ({ nft }) => {
+  const [selectedToken, setSelectedToken] = useState(null);
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+
   const nftId = nft.attributes.find(item => item.trait_type === "Token ID").value;
   const currency = nft.attributes.find(i => i.trait_type === "Linked Token").value;
+
+  const tokens = [
+    { name: 'USDT', price: '500' },
+    { name: 'USDC', price: '500' },
+    { name: 'DAI', price: '500' },
+    { name: 'BUSD', price: '500' }
+  ];
 
   const defaultNFT = {
     details: [
@@ -56,18 +65,54 @@ const NFTDetailsPage = ({ nft }) => {
             </div>
 
             <div className="bg-[#2a2a2a]/30 rounded-xl p-6 border border-gray-800/50 backdrop-blur-sm">
-              <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
+              <div className="flex flex-col gap-4">
                 <div className="flex items-center gap-2">
                   <Wallet size={20} className="text-purple-400" />
                   <div>
                     <p className="text-gray-400 text-sm">Current Price</p>
                     <p className="text-2xl font-bold bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
-                      {"500"} {currency}
+                      {selectedToken ? selectedToken.price : "500"} {selectedToken ? selectedToken.name : currency}
                     </p>
                   </div>
                 </div>
-                <button className="w-full sm:w-auto px-8 py-3 bg-gradient-to-r from-purple-500 to-indigo-500 text-white font-bold rounded-lg transition-all duration-300 transform hover:scale-105 hover:shadow-sm hover:shadow-purple-500/25">
-                  Buy Now
+
+                <div className="relative">
+                  <button 
+                    onClick={() => setIsDropdownOpen(!isDropdownOpen)}
+                    className="w-full p-3 bg-[#1a1a1a] rounded-lg border border-gray-800/50 flex items-center justify-between text-left"
+                  >
+                    <span className="text-gray-300">
+                      {selectedToken ? `Pay with ${selectedToken.name}` : 'Select payment token'}
+                    </span>
+                    <ChevronDown 
+                      size={20} 
+                      className={`text-gray-400 transition-transform ${isDropdownOpen ? 'rotate-180' : ''}`}
+                    />
+                  </button>
+
+                  {isDropdownOpen && (
+                    <div className="absolute w-full mt-2 bg-[#1a1a1a] rounded-lg border border-gray-800/50 overflow-hidden z-10">
+                      {tokens.map((token, index) => (
+                        <button
+                          key={index}
+                          onClick={() => {
+                            setSelectedToken(token);
+                            setIsDropdownOpen(false);
+                          }}
+                          className="w-full p-3 text-left hover:bg-purple-500/10 transition-colors text-gray-300"
+                        >
+                          {token.name}
+                        </button>
+                      ))}
+                    </div>
+                  )}
+                </div>
+
+                <button 
+                  className={`w-full px-8 py-3 bg-gradient-to-r from-purple-500 to-indigo-500 text-white font-bold rounded-lg transition-all duration-300 transform hover:scale-105 hover:shadow-sm hover:shadow-purple-500/25 ${!selectedToken ? 'opacity-50 cursor-not-allowed' : ''}`}
+                  disabled={!selectedToken}
+                >
+                  {selectedToken ? 'Buy Now' : 'Select a token to continue'}
                 </button>
               </div>
               <p className="text-sm text-gray-400 text-center mt-4">Gas fees will be calculated at checkout</p>
