@@ -21,7 +21,7 @@ const NftCard: FC<NftCardProps> = ({ nfts }) => {
             {nfts.map((nft) => (
                 <div
                     key={nft.id}
-                    className="group relative bg-[#1e1e1e] rounded-2xl overflow-hidden shadow-lg transition-all duration-300 hover:shadow-2xl hover:scale-[1.03]"
+                    className="group relative bg-[#1e1e1e] rounded-2xl overflow-hidden transition-all duration-300 hover:shadow-2xl hover:shadow-purple-500/10"
                 >
                     <div className="relative">
                         <img

@@ -23,7 +23,7 @@ const NFTDetailsPage = ({ nft }) => {
         <div className="max-w-7xl mx-auto flex flex-col lg:flex-row gap-8 mt-14">
 
           <div className="w-full lg:w-2/5 lg:sticky lg:top-8 lg:self-start">
-            <div className="group bg-[#2a2a2a]/50 rounded-2xl overflow-hidden border border-gray-800/50 backdrop-blur-sm">
+            <div className="bg-[#2a2a2a]/50 rounded-2xl overflow-hidden border border-gray-800/50 backdrop-blur-sm">
               <div className="relative aspect-square">
                 <img src={nft.image} alt={nft.name} className="w-full h-full object-cover" />
               </div>
