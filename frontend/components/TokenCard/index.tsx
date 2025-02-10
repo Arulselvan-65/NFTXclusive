@@ -27,7 +27,7 @@ const TokenCard = ({ tokens }) => {
 
       await mintToken({
         id: token.id,
-        amount: 1,
+        amount: 500,
       });
     } catch (error) {
       setTransactionStatus('error');
@@ -35,6 +35,7 @@ const TokenCard = ({ tokens }) => {
   };
 
   const handleCloseModal = () => {
+    window.location.reload();
     setIsModalOpen(false);
     setTransactionStatus(null);
   };

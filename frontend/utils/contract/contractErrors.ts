@@ -14,7 +14,7 @@ export function handleContractErrors(args: any) {
     } else if (errorMessage.includes('insufficient funds for gas')) {
       toast.error("Insufficient funds for gas");
     } else if (errorMessage.includes("Wallet not connected")) {
-      toast.error("Please connect your wallet to mint tokens");
+      toast.error("Please connect your wallet to continue");
     } else {
       toast.error(errorMessage);
     }

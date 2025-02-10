@@ -11,8 +11,8 @@ const TokenMintingPage = () => {
     const { totalSupply, currentSupply, isLoading } = useReadTokenData(token.id as any);
     return {
       ...token,
-      maxSupply: isLoading ? "Loading..." : totalSupply?.toString(),
-      currentSupply: isLoading ? "Loading..." : currentSupply?.toString(),
+      maxSupply: isLoading ? "" : totalSupply?.toString(),
+      currentSupply: isLoading ? "" : currentSupply?.toString(),
     };
   });
   

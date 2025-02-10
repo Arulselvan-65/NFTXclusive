@@ -15,7 +15,7 @@ export const useMintToken = () => {
     hash: hash,
   });
 
-  const mintToken = async ({ id, amount = 500 }: MintProps) => {
+  const mintToken = async ({ id, amount }: MintProps) => {
     try {
       writeContract({
         ...wagmiContractConfig,

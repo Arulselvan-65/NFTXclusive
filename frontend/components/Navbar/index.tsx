@@ -1,14 +1,17 @@
+import React from 'react';
 import { FC, useState } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { Menu, X, Coins, Wallet } from 'lucide-react';
 import ConnectButtonC from '@/components/ConnectButton';
-import { ToastContainer } from 'react-toastify';
+import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { useAccount } from 'wagmi';
 
 const Navbar: FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const pathname = usePathname();
+  const { isConnected } = useAccount();
 
   const navigation = [
     { name: 'Discover NFTs', href: '/discover', icon: Wallet },
@@ -17,9 +20,19 @@ const Navbar: FC = () => {
 
   const isActivePath = (path: string) => pathname === path;
 
+  const handleWalletToast = () => {
+    const toastId = 'connect-wallet';
+    if (!toast.isActive(toastId)) {
+      toast.error("Please connect your wallet to proceed", {
+        toastId: toastId,
+        autoClose: 5000,
+      });
+    }
+  };
+
   return (
     <>
-      <ToastContainer />
+      <ToastContainer limit={3}/>
       <div className="w-screen bg-[#121212] bg-opacity-60 backdrop-blur-md fixed top-0 left-0 z-50">
         <div className="max-w-7xl mx-auto px-4">
           <div className="flex items-center justify-between h-16">
@@ -45,25 +58,31 @@ const Navbar: FC = () => {
             </div>
 
             <div className="hidden md:flex md:items-center md:space-x-4">
-            <div className="flex space-x-4 mr-4">
-              {navigation.map((item) => {
-                const Icon = item.icon;
-                return (
-                  <Link
-                    key={item.name}
-                    href={item.href}
-                    className={`px-3 py-2 rounded-lg text-sm font-medium transition-colors flex items-center space-x-2 ${
-                      isActivePath(item.href)
-                        ? 'text-purple-400 bg-purple-500/10'
-                        : 'text-gray-300 hover:text-purple-400 hover:bg-purple-500/10'
-                    }`}
-                  >
-                    <Icon className="w-4 h-4" />
-                    <span>{item.name}</span>
-                  </Link>
-                );
-              })}
-            </div>
+              <div className="flex space-x-4 mr-4">
+                {navigation.map((item) => {
+                  const Icon = item.icon;
+                  return (
+                    <Link
+                      key={item.name}
+                      href={item.href === '/mint-tokens' && !isConnected ? '#' : item.href}
+                      onClick={(e) => {
+                        if (item.href === '/mint-tokens' && !isConnected) {
+                          e.preventDefault();
+                          handleWalletToast();
+                        }
+                      }}
+                      className={`px-3 py-2 rounded-lg text-sm font-medium transition-colors flex items-center space-x-2 ${
+                        isActivePath(item.href)
+                          ? 'text-purple-400 bg-purple-500/10'
+                          : 'text-gray-300 hover:text-purple-400 hover:bg-purple-500/10'
+                      }`}
+                    >
+                      <Icon className="w-4 h-4" />
+                      <span>{item.name}</span>
+                    </Link>
+                  );
+                })}
+              </div>
             </div>
             <ConnectButtonC />
           </div>
@@ -81,13 +100,20 @@ const Navbar: FC = () => {
               return (
                 <Link
                   key={item.name}
-                  href={item.href}
+                  href={item.href === '/mint-tokens' && !isConnected ? '#' : item.href}
+                  onClick={(e) => {
+                    if (item.href === '/mint-tokens' && !isConnected) {
+                      e.preventDefault();
+                      handleWalletToast();
+                    } else {
+                      setIsMenuOpen(false);
+                    }
+                  }}
                   className={`block px-3 py-2 rounded-md text-base font-medium ${
                     isActivePath(item.href)
                       ? 'text-purple-400 bg-purple-500/10'
                       : 'text-gray-300 hover:text-purple-400 hover:bg-purple-500/10'
                   }`}
-                  onClick={() => setIsMenuOpen(false)}
                 >
                   <span className="flex items-center space-x-2">
                     <Icon className="w-4 h-4" />

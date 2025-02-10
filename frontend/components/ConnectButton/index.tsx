@@ -1,8 +1,15 @@
 'use client'
 import { ConnectButton } from '@rainbow-me/rainbowkit';
-import Button from '../Button';
 
 const ConnectButtonC = () => {
+    const Button = ({ onClick, text }: { onClick: () => void, text: string }) => {
+        return (
+            <button onClick={onClick} type="button" className="h-10 bg-gradient-to-r from-purple-500 to-indigo-500 text-white font-semibold text-[16px] rounded-lg w-36 hover:shadow-md hover:shadow-purple-500/25">
+                <span>{text}</span>
+            </button>
+        );
+    };
+
     return (
         <div>
             <ConnectButton.Custom>
@@ -31,13 +38,13 @@ const ConnectButtonC = () => {
                             {(() => {
                                 if (!connected) {
                                     return (
-                                        <Button onclick={openConnectModal} className= "bg-gradient-to-r from-purple-500 to-indigo-500 text-white cursor-pointer rounded-lg" text={"Connect Wallet"}/>
+                                        <Button onClick={openConnectModal} text="Connect Wallet"/>
                                     );
                                 }
 
                                 if (chain.unsupported) {
                                     return (
-                                        <button onClick={openChainModal} type="button">
+                                        <button onClick={openChainModal} type="button" className="bg-gradient-to-r from-purple-500 to-indigo-500 text-white cursor-pointer rounded-lg">
                                             Wrong network
                                         </button>
                                     );
@@ -50,9 +57,8 @@ const ConnectButtonC = () => {
                                             type="button"
                                             style={{ textAlign: 'left' }}
                                         >
-                                            <div
-                                                className='flex items-center justify-center rounded-lg  bg-gradient-to-r from-purple-500 to-indigo-500 text-white w-36 px-1 h-10 font-semibold text-[16px]'>
-                                                <span> {account.displayName}</span>
+                                            <div className='flex items-center justify-center rounded-lg  bg-gradient-to-r from-purple-500 to-indigo-500 text-white w-36 px-1 h-10 font-semibold text-[16px]'>
+                                                <span>{account.displayName}</span>
                                             </div>
                                         </button>
                                     </div>

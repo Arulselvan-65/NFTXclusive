@@ -79,30 +79,6 @@ const TransactionModal = ({ isOpen, status, onClose }) => {
           )}
         </div>
       </div>
-
-      <style jsx>{`
-        @keyframes bounce {
-          0%, 100% {
-            transform: translateY(0);
-            opacity: 0.3;
-          }
-          50% {
-            transform: translateY(-10px);
-            opacity: 1;
-          }
-        }
-        @keyframes scale {
-          0% {
-            transform: scale(0);
-          }
-          50% {
-            transform: scale(1.2);
-          }
-          100% {
-            transform: scale(1);
-          }
-        }
-      `}</style>
     </div>
   );
 };

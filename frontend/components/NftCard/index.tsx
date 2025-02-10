@@ -1,7 +1,9 @@
 'use client';
 import { FC } from 'react';
 import Link from "next/link";
-import { Heart, ShoppingCart, Zap } from 'lucide-react';
+import { ShoppingCart, Zap } from 'lucide-react';
+import { toast } from 'react-toastify'; 
+import { useAccount } from 'wagmi'; 
 
 interface NFT {
     id: number;
@@ -16,6 +18,18 @@ interface NftCardProps {
 }
 
 const NftCard: FC<NftCardProps> = ({ nfts }) => {
+    const { isConnected } = useAccount(); 
+
+    const handleWalletToast = () => {
+      const toastId = 'connect-wallet-nft';
+      if (!toast.isActive(toastId)) {
+        toast.error("Please connect your wallet to proceed", {
+          toastId: toastId,
+          autoClose: 5000,
+        });
+      }
+    };
+
     return (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
             {nfts.map((nft) => (
@@ -27,9 +41,8 @@ const NftCard: FC<NftCardProps> = ({ nfts }) => {
                         <img
                             src={nft.image}
                             alt={nft.name}
-                            className="w-full h-64 object-cover transition-transform duration-300 group-hover:scale-110"
+                            className="w-full h-64 object-cover" 
                         />
-                       
                     </div>
 
                     <div className="p-5">
@@ -48,7 +61,16 @@ const NftCard: FC<NftCardProps> = ({ nfts }) => {
                             </div>
                         </div>
 
-                        <Link href={`/purchasenft/${nft.id}`} className="block">
+                        <Link 
+                            href={isConnected ? `/purchasenft/${nft.id}` : '#'} 
+                            onClick={(e) => {
+                                if (!isConnected) {
+                                    e.preventDefault();
+                                    handleWalletToast();
+                                }
+                            }}
+                            className="block"
+                        >
                             <button className="w-full flex items-center justify-center gap-2 py-3 bg-gradient-to-r from-purple-500 to-indigo-500 text-white rounded-lg hover:shadow-sm hover:shadow-purple-500/30 transition transform hover:scale-105">
                                 <ShoppingCart size={18} />
                                 View Details
