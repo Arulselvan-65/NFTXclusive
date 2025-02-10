@@ -1,7 +1,7 @@
 import {createInterface} from "readline";
 import "../../contract/artifacts/contracts/MultiToken.sol/MultiToken.json";
 import {abi} from "../../contract/artifacts/contracts/MultiToken.sol/MultiToken.json";
-import { handleContractErrors } from "./blockchain/contractErrors";
+import { handleContractErrors } from "./contract/contractErrors";
 import {ethers} from "ethers";
 
 

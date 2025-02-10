@@ -1,9 +1,19 @@
+import { useAccount, useWalletClient, useConnections } from "wagmi";
+import { ethers } from "ethers";
+import { ExternalProvider } from "@ethersproject/providers";
+
+
 import React from 'react';
 import Navbar from '../Navbar';
 import TokenCard from '../TokenCard';
 import mockTokens from "@/utils/token-data/tokens.json";
 
+
+
 const TokenMintingPage = () => {
+
+
+
   return (
     <div className="min-h-screen bg-gradient-to-b from-[#121212] to-[#1a1a1a] flex flex-col">
       <Navbar />

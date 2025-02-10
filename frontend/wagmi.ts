@@ -1,13 +1,15 @@
-import { getDefaultConfig } from '@rainbow-me/rainbowkit';
-import {
-    polygonAmoy
-} from 'wagmi/chains';
-
-const project_id = process.env.NEXT_PUBLIC_RAINBOW_PROJECT_ID;
+import { http } from "wagmi";
+import { hardhat } from "wagmi/chains";
+import { getDefaultConfig } from "@rainbow-me/rainbowkit";
 
 export const config = getDefaultConfig({
-    appName: 'NftXclusive',
-    projectId: project_id,
-    chains: [polygonAmoy],
-    ssr: true,
-});
+    appName: "My RainbowKit App",
+    projectId: process.env.NEXT_PUBLIC_RAINBOW_PROJECT_ID,
+    chains: [hardhat],
+    transports: {
+      [hardhat.id]: http("http://127.0.0.1:8545"),
+    },
+    ssr: false, 
+  });
+
+export default config;
