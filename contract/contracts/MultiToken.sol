@@ -21,7 +21,7 @@ contract MultiToken is ERC1155, ReentrancyGuard {
         totalSupply[4] = 250000;  
     }
 
-    event TokensMinted(address indexed to, uint256 tokenId, uint256 amount);
+    event TokensMinted(address indexed to, uint256 indexed tokenId, uint256 amount);
     event ExchangeCompleted(address indexed user, uint256 fungibleTokenId, uint256 fungibleAmount, uint256 nonFungibleTokenId);
 
     error InsufficientTokenBalance(uint256 requiredBalance);

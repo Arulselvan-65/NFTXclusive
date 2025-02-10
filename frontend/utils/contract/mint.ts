@@ -1,33 +1,42 @@
-import { useWriteContract, useAccount } from 'wagmi';
-import { parseEther } from 'viem';
-import {hardhat} from 'wagmi/chains';
-import contractABI from '../../../contract/artifacts/contracts/MultiToken.sol/MultiToken.json';
+import { useWriteContract, useAccount, useTransaction, useWaitForTransactionReceipt } from 'wagmi';
+import { hardhat } from 'wagmi/chains';
+import { wagmiContractConfig } from './contracts';
 
 interface MintProps {
   id: number;
   amount: number;
-  data?: string;
 }
 
 export const useMintToken = () => {
-  const { writeContract } = useWriteContract();
-  const account = useAccount();
+  const { writeContract, data: hash, isPending, isError,error: Error } = useWriteContract();
+  const { address } = useAccount();
 
-  const mintToken = async ({ id, amount, data = '0x' }: MintProps) => {
+  const { isSuccess: isConfirmed } = useWaitForTransactionReceipt({
+    hash: hash,
+  });
+
+  const mintToken = async ({ id, amount = 500 }: MintProps) => {
     try {
-      await writeContract({
-        address: '0x5FbDB2315678afecb367f032d93F642f64180aa3', // Replace with your contract address
-        abi: contractABI.abi,
+      writeContract({
+        ...wagmiContractConfig,
         functionName: 'mint',
-        args: [id, amount, data],
+        args: [BigInt(id), BigInt(amount), '0x'],
         chain: hardhat,
-        account: account.address, 
+        account: address,
       });
+
     } catch (error) {
-      console.error('Error minting token:', error);
+      console.log('Error minting token:', error);
       throw error;
     }
   };
 
-  return { mintToken };
+  return {
+    mintToken,
+    hash,
+    isPending,
+    isError,
+    isConfirmed,
+    Error
+  };
 };
