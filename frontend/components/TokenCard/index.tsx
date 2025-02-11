@@ -1,83 +1,7 @@
-import React, { useState, useEffect } from 'react';
-import { ArrowRight } from 'lucide-react';
-import { useMintToken } from '@/utils/contract';
-import TransactionModal from '../TransactionModal';
-import {toast} from 'react-toastify';
-import { useAccount,usePublicClient } from 'wagmi';
-import { parseAbiItem } from 'viem';
+import React from 'react';
+import {MintTransactionHandler, MintButton} from '@/components/mintTransactionHandler';
 
 const TokenCard = ({ tokens }) => {
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [transactionStatus, setTransactionStatus] = useState(null);
-  const {address} = useAccount(); 
-  const { mintToken, isPending, isConfirmed, isError, hash } = useMintToken();
-  const publicClient = usePublicClient();
-
-  const handleToast = () => {
-      const toastId = 'token-already-minted';
-      if (!toast.isActive(toastId)) {
-        toast.error("You have already minted this token", {
-          toastId: toastId,
-          autoClose: 2000,
-        });
-      }
-    };
-
-
-  useEffect(() => {
-    if (isModalOpen) {
-      if (isPending) {
-        setTransactionStatus('loading');
-      } else if (isConfirmed) {
-        setTransactionStatus('success');
-      } else if (isError) {
-        setTransactionStatus('error');
-      }
-    }
-  }, [isPending, isConfirmed, isError, isModalOpen]);
-
-  const handleMint = async (token) => {
-
-     try {
-            const logs = await publicClient.getLogs({
-              address: '0x5FbDB2315678afecb367f032d93F642f64180aa3',
-              event: parseAbiItem('event TokensMinted(address indexed to, uint256 indexed tokenId, uint256 amount)'),
-              args: {
-                to: address,
-                tokenId: BigInt(token.id),
-              },
-              fromBlock: BigInt(0),
-              toBlock: 'latest'
-            });
-
-            if (logs.length > 0) {
-             handleToast();
-              return;
-            }
-                
-            try {
-              setIsModalOpen(true);
-              setTransactionStatus('loading');
-        
-              await mintToken({
-                id: token.id,
-                amount: 500,
-              });
-            } catch (error) {
-              setTransactionStatus('error');
-            }
-          } catch (error) {
-            console.error('Error checking mint history:', error);
-          }
-        };
-
-
-  const handleCloseModal = () => {
-    window.location.reload();
-    setIsModalOpen(false);
-    setTransactionStatus(null);
-  };
-
   return (
     <>
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
@@ -112,26 +36,19 @@ const TokenCard = ({ tokens }) => {
                 {token.description}
               </p>
 
-              <div className="pt-4 border-t border-gray-800">
-                <button
-                  onClick={() => handleMint(token)}
-                  className="w-full bg-gradient-to-r from-purple-500 to-indigo-500 text-white font-semibold rounded-lg py-2.5 flex items-center justify-center gap-2 transition-all duration-300 hover:opacity-90 disabled:opacity-50 disabled:cursor-not-allowed"
-                  disabled={isPending}
-                >
-                  <span>{isPending ? 'Minting...' : 'Mint Now'}</span>
-                  <ArrowRight className="w-4 h-4" />
-                </button>
-              </div>
+              <MintTransactionHandler id={token.id} amount={500}>
+                {({ handleMint, isPending }) => (
+                  <MintButton 
+                    onClick={handleMint}
+                    isPending={isPending}
+                    className="w-full"
+                  />
+                )}
+              </MintTransactionHandler>
             </div>
           </div>
         ))}
       </div>
-
-      <TransactionModal
-        isOpen={isModalOpen}
-        status={transactionStatus}
-        onClose={handleCloseModal}
-      />
     </>
   );
 };

@@ -4,7 +4,7 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { Menu, X, Coins, Wallet } from 'lucide-react';
 import ConnectButtonC from '@/components/ConnectButton';
-import { ToastContainer, toast } from 'react-toastify';
+import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useAccount } from 'wagmi';
 
@@ -32,7 +32,6 @@ const Navbar: FC = () => {
 
   return (
     <>
-      <ToastContainer limit={3}/>
       <div className="w-screen bg-[#121212] bg-opacity-60 backdrop-blur-md fixed top-0 left-0 z-50">
         <div className="max-w-7xl mx-auto px-4">
           <div className="flex items-center justify-between h-16">

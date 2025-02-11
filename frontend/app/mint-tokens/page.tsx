@@ -1,10 +1,9 @@
 "use client"
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import Navbar from '@/components/Navbar';
 import TokenCard from '@/components/TokenCard';
 import mockTokens from "@/utils/token-data/tokens.json";
 import { useReadTokenData } from '@/utils/contract';
-
 
 const TokenMintingPage = () => {
   const tokens = mockTokens.map((token) => {

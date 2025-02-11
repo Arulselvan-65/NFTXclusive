@@ -16,6 +16,8 @@ const NFTDetailsPage = ({ nft }) => {
     ]
   };
 
+  
+
   return (
     <div>
       <div className="min-h-screen bg-gradient-to-b from-[#1a1a1a] to-[#0a0a0a] text-white p-6 md:p-8">

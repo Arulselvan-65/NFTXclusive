@@ -6,17 +6,25 @@
 
 
 @layer utilities {
-    .gradient-title {
-        @apply font-extrabold bg-gradient-to-br from-blue-600 to-blue-400 bg-clip-text tracking-tighter text-transparent pb-4 pr-2;
-    }
+  .gradient-title {
+    @apply font-extrabold bg-gradient-to-br from-blue-600 to-blue-400 bg-clip-text tracking-tighter text-transparent pb-4 pr-2;
+  }
 }
 
 body {
-    background-color: black;
+  background-color: black;
 }
+
 @keyframes pulse {
-  0%, 100% { opacity: 0.6; }
-  50% { opacity: 0.2; }
+
+  0%,
+  100% {
+    opacity: 0.6;
+  }
+
+  50% {
+    opacity: 0.2;
+  }
 }
 
 .animate-pulse {
@@ -24,77 +32,93 @@ body {
 }
 
 @keyframes move {
-    0% {
-        transform: translateY(0) translateX(0);
-    }
-    50% {
-        transform: translateY(-20px) translateX(20px);
-    }
-    100% {
-        transform: translateY(0) translateX(0);
-    }
+  0% {
+    transform: translateY(0) translateX(0);
+  }
+
+  50% {
+    transform: translateY(-20px) translateX(20px);
+  }
+
+  100% {
+    transform: translateY(0) translateX(0);
+  }
 }
 
 .group:hover {
-    transform: scale(1.05);
-    transition: transform 0.3s ease;
-  }
+  transform: scale(1.05);
+  transition: transform 0.3s ease;
+}
 
 .neon-border {
-    border: 2px solid transparent;
-    border-image: linear-gradient(45deg, #ff00ff, #00ffff) 1;
-    border-radius: 10px;
-    padding: 1rem;
-    backdrop-filter: blur(10px);
+  border: 2px solid transparent;
+  border-image: linear-gradient(45deg, #ff00ff, #00ffff) 1;
+  border-radius: 10px;
+  padding: 1rem;
+  backdrop-filter: blur(10px);
 }
+
 .neon-circle {
-    position: absolute;
-    border-radius: 50%;
-    filter: blur(50px);
-    animation: move 10s infinite;
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(50px);
+  animation: move 10s infinite;
 }
+
 .circle-1 {
-    width: 150px;
-    height: 150px;
-    background: rgba(147, 51, 234, 0.5); /* Purple */
-    top: 10%;
-    left: 10%;
+  width: 150px;
+  height: 150px;
+  background: rgba(147, 51, 234, 0.5);
+  /* Purple */
+  top: 10%;
+  left: 10%;
 }
+
 .circle-2 {
-    width: 200px;
-    height: 200px;
-    background: rgba(59, 130, 246, 0.5); /* Indigo */
-    top: 50%;
-    left: 70%;
+  width: 200px;
+  height: 200px;
+  background: rgba(59, 130, 246, 0.5);
+  /* Indigo */
+  top: 50%;
+  left: 70%;
 }
+
 .circle-3 {
-    width: 100px;
-    height: 100px;
-    background: rgba(147, 51, 234, 0.5); /* Purple */
-    top: 80%;
-    left: 30%;
+  width: 100px;
+  height: 100px;
+  background: rgba(147, 51, 234, 0.5);
+  /* Purple */
+  top: 80%;
+  left: 30%;
 }
 
 
 @keyframes bounce {
-    0%, 100% {
-      transform: translateY(0);
-      opacity: 0.3;
-    }
-    50% {
-      transform: translateY(-10px);
-      opacity: 1;
-    }
+
+  0%,
+  100% {
+    transform: translateY(0);
+    opacity: 0.3;
   }
-  @keyframes scale {
-    0% {
-      transform: scale(0);
-    }
-    50% {
-      transform: scale(1.2);
-    }
-    100% {
-      transform: scale(1);
-    }
+
+  50% {
+    transform: translateY(-10px);
+    opacity: 1;
   }
+}
+
+@keyframes scale {
+  0% {
+    transform: scale(0);
+  }
+
+  50% {
+    transform: scale(1.2);
+  }
+
+  100% {
+    transform: scale(1);
+  }
+}
+
 

@@ -3,7 +3,7 @@ import React from 'react';
 import NFTDetailsPage from '@/components/NFTDetailsPage';
 import axios from 'axios';
 import { useEffect, useState } from 'react';
-import { Box, Loader } from 'lucide-react';
+import { Box } from 'lucide-react';
 
 const PurchaseNftPage = ({ params }) => {
   const { id } = params;
@@ -50,23 +50,6 @@ const PurchaseNftPage = ({ params }) => {
             />
           ))}
         </div>
-
-        <style jsx>{`
-          @keyframes pulse {
-            0% {
-              transform: translateY(0);
-              opacity: 0.3;
-            }
-            50% {
-              transform: translateY(-10px);
-              opacity: 1;
-            }
-            100% {
-              transform: translateY(0);
-              opacity: 0.3;
-            }
-          }
-        `}</style>
       </div>
     );
   }
