@@ -25,7 +25,7 @@ const Navbar: FC = () => {
     if (!toast.isActive(toastId)) {
       toast.error("Please connect your wallet to proceed", {
         toastId: toastId,
-        autoClose: 5000,
+        autoClose: 2000,
       });
     }
   };

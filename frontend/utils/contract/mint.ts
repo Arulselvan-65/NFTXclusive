@@ -1,4 +1,4 @@
-import { useWriteContract, useAccount, useTransaction, useWaitForTransactionReceipt } from 'wagmi';
+import { useWriteContract, useAccount, useWaitForTransactionReceipt } from 'wagmi';
 import { hardhat } from 'wagmi/chains';
 import { wagmiContractConfig } from './contracts';
 

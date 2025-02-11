@@ -2,11 +2,27 @@ import React, { useState, useEffect } from 'react';
 import { ArrowRight } from 'lucide-react';
 import { useMintToken } from '@/utils/contract';
 import TransactionModal from '../TransactionModal';
+import {toast} from 'react-toastify';
+import { useAccount,usePublicClient } from 'wagmi';
+import { parseAbiItem } from 'viem';
 
 const TokenCard = ({ tokens }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [transactionStatus, setTransactionStatus] = useState(null);
+  const {address} = useAccount(); 
   const { mintToken, isPending, isConfirmed, isError, hash } = useMintToken();
+  const publicClient = usePublicClient();
+
+  const handleToast = () => {
+      const toastId = 'token-already-minted';
+      if (!toast.isActive(toastId)) {
+        toast.error("You have already minted this token", {
+          toastId: toastId,
+          autoClose: 2000,
+        });
+      }
+    };
+
 
   useEffect(() => {
     if (isModalOpen) {
@@ -21,18 +37,40 @@ const TokenCard = ({ tokens }) => {
   }, [isPending, isConfirmed, isError, isModalOpen]);
 
   const handleMint = async (token) => {
-    try {
-      setIsModalOpen(true);
-      setTransactionStatus('loading');
 
-      await mintToken({
-        id: token.id,
-        amount: 500,
-      });
-    } catch (error) {
-      setTransactionStatus('error');
-    }
-  };
+     try {
+            const logs = await publicClient.getLogs({
+              address: '0x5FbDB2315678afecb367f032d93F642f64180aa3',
+              event: parseAbiItem('event TokensMinted(address indexed to, uint256 indexed tokenId, uint256 amount)'),
+              args: {
+                to: address,
+                tokenId: BigInt(token.id),
+              },
+              fromBlock: BigInt(0),
+              toBlock: 'latest'
+            });
+
+            if (logs.length > 0) {
+             handleToast();
+              return;
+            }
+                
+            try {
+              setIsModalOpen(true);
+              setTransactionStatus('loading');
+        
+              await mintToken({
+                id: token.id,
+                amount: 500,
+              });
+            } catch (error) {
+              setTransactionStatus('error');
+            }
+          } catch (error) {
+            console.error('Error checking mint history:', error);
+          }
+        };
+
 
   const handleCloseModal = () => {
     window.location.reload();
