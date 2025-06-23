@@ -7,7 +7,7 @@ export const config = getDefaultConfig({
     projectId: process.env.NEXT_PUBLIC_RAINBOW_PROJECT_ID,
     chains: [hardhat],
     transports: {
-      [hardhat.id]: http("http://127.0.0.1:8545"),
+      [hardhat.id]: http("https://orange-barnacle-g9rvjr9rvpxf95pv-8545.app.github.dev/"),
     },
     ssr: false, 
   });
