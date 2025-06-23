@@ -1,5 +1,5 @@
 export const wagmiContractConfig = {
-    address: "0x5FbDB2315678afecb367f032d93F642f64180aa3",
+    address: "0x73511669fd4dE447feD18BB79bAFeAC93aB7F31f",
     abi: [
     {
       "inputs": [
